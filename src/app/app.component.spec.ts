@@ -31,4 +31,10 @@ describe('appComponent', () => {
     fixture.detectChanges();
     expect(compiled.querySelector('h1')?.textContent).toContain('dominiStore');
   });
+
+  it('should change the title', () => {
+    const newTitle = 'newTitle';
+    component.title = newTitle;
+    expect(component.title).toEqual(newTitle);
+  });
 });
