@@ -1,0 +1,8 @@
+<div class="products-container">
+  <div class="product-grid">
+    <ng-container *ngFor="let product of products$ | async as products; trackBy:trackFn">
+      <app-product-card data-testid="product-card" (addToCartEvent)="addToCart($event)" class="product-card"
+        [product]="product"></app-product-card>
+    </ng-container>
+  </div>
+</div>
