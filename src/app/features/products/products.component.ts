@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIService } from '../../api/api.service';
 import { Product } from './models/product.model';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-products',
@@ -12,13 +13,11 @@ export class ProductsComponent implements OnInit {
   products$!: Observable<Product[]>;
 
   private readonly _apiSvc = inject(APIService); // spy
+  private readonly _store = inject(Store);
 
   ngOnInit(): void {
     this.products$ = this._apiSvc.getProducts(); // toHaveBeenCalled
-  }
-
-  trackFn(_: number, product: Product): number {
-    return product.id;
+    this._store.subscribe((state) => console.log(state));
   }
 
   //TODO: Add unit test
