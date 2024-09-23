@@ -11,6 +11,8 @@ import { ProductCardComponent } from './product-card.component';
 registerLocaleData(localeEs, 'es');
 describe('productCardComponent', () => {
   @Component({
+    standalone: true,
+    imports: [ProductCardComponent],
     template: `<app-product-card [product]="currentProduct()" />`,
   })
   class ProductCardWrapperComponent {
@@ -27,8 +29,11 @@ describe('productCardComponent', () => {
 
   it('set current product to input', () => {
     const fixture = TestBed.configureTestingModule({
-      declarations: [ProductCardComponent, ProductCardWrapperComponent],
-      imports: [RouterTestingModule],
+      imports: [
+        RouterTestingModule,
+        ProductCardComponent,
+        ProductCardWrapperComponent,
+      ],
     }).createComponent(ProductCardWrapperComponent);
 
     const { componentInstance } = fixture;
@@ -48,8 +53,11 @@ describe('productCardComponent', () => {
 
   it('emit addToCartEvent with the current product when onAddToCart is called', () => {
     const fixture = TestBed.configureTestingModule({
-      declarations: [ProductCardComponent, ProductCardWrapperComponent],
-      imports: [RouterTestingModule],
+      imports: [
+        RouterTestingModule,
+        ProductCardComponent,
+        ProductCardWrapperComponent,
+      ],
     }).createComponent(ProductCardWrapperComponent);
 
     const { componentInstance } = fixture;

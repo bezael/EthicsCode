@@ -1,5 +1,5 @@
 <div class="products-container">
-  @if ((loading$ | async) === false) {
+  @if ((loading$()) === false) {
   <div class="product-grid">
     @for (product of products$(); track $index) {
     <app-product-card data-testid="product-card" class="product-card" [product]="product" />

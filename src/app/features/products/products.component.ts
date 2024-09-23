@@ -21,7 +21,7 @@ export class ProductsComponent {
 
   products$ = this._store.selectSignal(selectProducts);
   errorMessage$ = this._store.select(selectProductsError);
-  loading$ = this._store.select(selectProductsLoading);
+  loading$ = this._store.selectSignal(selectProductsLoading);
 
   addToCart(product: Product): void {
     console.log('Add product to cart', product);

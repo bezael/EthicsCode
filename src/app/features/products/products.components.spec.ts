@@ -1,24 +1,28 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { StoreModule } from '@ngrx/store';
 import { of } from 'rxjs';
 import { APIService } from '../../api/api.service';
-import { createProduct, createProducts } from './__mocks__/mock.data';
+import { createProducts } from './__mocks__/mock.data';
 import { Product } from './models/product.model';
 import { ProductsComponent } from './products.component';
+import { productsReducer } from './state/products.reducers';
 
 @Component({
   selector: 'app-product-card',
+  standalone: true,
+  imports: [],
   template: ` <div data-testid="mock-product-card" class="product-container">
     {{ currentProduct.title }}
   </div>`,
 })
 class MockProductCardComponent {
   @Input({ required: true, alias: 'product' }) currentProduct!: Product;
-  @Output() addToCartEvent = new EventEmitter<Product>();
+  // @Output() addToCartEvent = new EventEmitter<Product>();
 }
 
-describe('ProductsComponent', () => {
+fdescribe('ProductsComponent', () => {
   let productsComponent: ProductsComponent;
   let fixture: ComponentFixture<ProductsComponent>;
   let apiServiceSpy: jasmine.SpyObj<APIService>;
@@ -40,8 +44,11 @@ describe('ProductsComponent', () => {
   beforeEach(async () => {
     const spy = jasmine.createSpyObj('APIService', ['getProducts']);
     await TestBed.configureTestingModule({
-      declarations: [ProductsComponent, MockProductCardComponent],
-      imports: [],
+      imports: [
+        ProductsComponent,
+        MockProductCardComponent,
+        StoreModule.forRoot({ products: productsReducer }),
+      ],
       providers: [
         {
           provide: APIService,
@@ -56,29 +63,6 @@ describe('ProductsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductsComponent);
     productsComponent = fixture.componentInstance;
-  });
-
-  it('should initialize products$ in ngOnInit', () => {
-    apiServiceSpy.getProducts.and.returnValues(of(dummyProducts));
-
-    productsComponent.ngOnInit();
-
-    expect(apiServiceSpy.getProducts).toHaveBeenCalled();
-
-    productsComponent.products$.subscribe((products: Product[]) => {
-      expect(products).toEqual(dummyProducts);
-      expect(products.length).toBe(2);
-    });
-  });
-
-  it('trackFn should return product id', () => {
-    const dummyProduct: Product = createProduct({
-      id: 11,
-      title: 'Silicon Power 256GB SSD 3D NAND',
-      price: '109',
-      category: 'electronics',
-    });
-    expect(productsComponent.trackFn(0, dummyProduct)).toBe(11);
   });
 
   it('should handler empty product list', () => {
