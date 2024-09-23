@@ -1,4 +1,5 @@
-<section class="product-section" *ngIf="product$ | async as product">
+@if (product$ | async; as product) {
+<section class="product-section">
   <div class="product-container">
     <div class="product-wrapper">
       <img alt="{{product.title}}" class="product-image" src="{{product.image}}">
@@ -13,3 +14,4 @@
     </div>
   </div>
 </section>
+}
