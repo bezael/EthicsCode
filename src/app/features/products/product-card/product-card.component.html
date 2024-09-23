@@ -1,4 +1,4 @@
-@let product = currentProduct;
+@let product = currentProduct();
 <a data-testid="product-image-link" class="product-image-link" [routerLink]="['/products', (product.id)]">
   <img class="product-image" src="{{ product.image }}" alt="{{ product.title }}" />
 </a>
