@@ -1,9 +1,11 @@
-<section class="product-section" *ngIf="product$ | async as product">
+@let product = product$();
+@if (product) {
+<section class="product-section">
   <div class="product-container">
     <div class="product-wrapper">
-      <img alt="{{product.title}}" class="product-image" src="{{product.image}}">
+      <img alt="{{product?.title}}" class="product-image" src="{{product?.image}}">
       <div class="product-details">
-        <h2 class="product-category">{{product.category}}</h2>
+        <h2 class="product-category">{{product?.category}}</h2>
         <h1 class="product-title">{{product.title}}</h1>
         <p class="product-description">{{product.description}}</p>
         <div class="flex">
@@ -13,3 +15,4 @@
     </div>
   </div>
 </section>
+}

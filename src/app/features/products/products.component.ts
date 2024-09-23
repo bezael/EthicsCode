@@ -1,27 +1,47 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { APIService } from '../../api/api.service';
+import { AsyncPipe } from '@angular/common';
+import {
+  Component,
+  computed,
+  inject,
+  Injector,
+  OnInit,
+  runInInjectionContext,
+  Signal,
+} from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Store } from '@ngrx/store';
 import { Product } from './models/product.model';
+import { ProductCardComponent } from './product-card/product-card.component';
+import {
+  selectProducts,
+  selectProductsError,
+  selectProductsLoading,
+} from './state/products.selectors';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
+  standalone: true,
+  imports: [ProductsComponent, ProductCardComponent, AsyncPipe],
 })
 export class ProductsComponent implements OnInit {
-  products$!: Observable<Product[]>;
+  private readonly _store = inject(Store);
+  private readonly _injector = inject(Injector);
+  private _productsSignal!: Signal<Product[]>;
 
-  private readonly _apiSvc = inject(APIService); // spy
+  products$ = computed(() => this._productsSignal());
+  errorMessage$ = this._store.select(selectProductsError);
+  loading$ = this._store.select(selectProductsLoading);
 
   ngOnInit(): void {
-    this.products$ = this._apiSvc.getProducts(); // toHaveBeenCalled
+    runInInjectionContext(this._injector, () => {
+      this._productsSignal = toSignal(
+        this._store.select(selectProducts)
+      ) as unknown as Signal<Product[]>;
+    });
   }
 
-  trackFn(_: number, product: Product): number {
-    return product.id;
-  }
-
-  //TODO: Add unit test
   addToCart(product: Product): void {
     console.log('Add product to cart', product);
   }

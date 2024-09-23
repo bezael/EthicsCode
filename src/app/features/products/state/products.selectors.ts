@@ -8,27 +8,27 @@ export const selectProductsState =
 
 export const selectProducts = createSelector(
   selectProductsState,
-  fromProducts.selectProducts,
+  fromProducts.selectProducts
 );
 
 export const selectProductsEntities = createSelector(
   selectProductsState,
-  fromProducts.selectProductsEntities,
+  fromProducts.selectProductsEntities
 );
 
 export const selectProductsLoading = createSelector(
   selectProductsState,
-  ({ loading }) => loading,
+  ({ loading }) => loading
 );
 
 export const selectProductsError = createSelector(
   selectProductsState,
-  ({ errorMessage }) => errorMessage,
+  ({ errorMessage }) => errorMessage
 );
 export const { selectRouteParams } = getRouterSelectors();
 
 export const selectProductById = createSelector(
   selectProductsEntities,
   selectRouteParams,
-  (productEntities, { productId }) => productEntities[productId],
+  (productEntities, { productId }) => productEntities[productId]
 );

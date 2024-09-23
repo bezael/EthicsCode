@@ -1,22 +1,18 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { APIService } from '../../../api/api.service';
-import { Product } from '../models/product.model';
-import { CommonModule } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectProductById } from '../state/products.selectors';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CurrencyPipe],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
 })
-export class DetailsComponent implements OnInit {
-  @Input() productId!: number;
-  product$!: Observable<Product>;
-  private readonly _productSvc = inject(APIService);
-
-  ngOnInit(): void {
-    this.product$ = this._productSvc.getProductById(this.productId);
-  }
+export class DetailsComponent {
+  // @Input() productId!: number;
+  // productId = input.required<number>();
+  private readonly _store = inject(Store);
+  product$ = this._store.selectSignal(selectProductById);
 }
