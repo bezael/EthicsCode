@@ -1,27 +1,81 @@
 # DominiStore
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.1.
+DominiStore is an e-commerce application built with Angular. It allows users to browse products, view details, and add items to their shopping cart.
 
-## Development server
+## Table of Contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [DominiStore](#doministore)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Technologies](#technologies)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Testing](#testing)
+  - [Contributions](#contributions)
+  - [License](#license)
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Easy navigation through products.
+- Product details with images, descriptions, and prices.
+- Functionality to add products to the cart.
+- Responsive design using Tailwind CSS.
 
-## Build
+## Technologies
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- [Angular](https://angular.io/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [RxJS](https://rxjs.dev/)
+- [Karma](https://karma-runner.github.io/latest/index.html) for unit testing.
 
-## Running unit tests
+## Installation
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Clone the repository:
 
-## Running end-to-end tests
+   ```bash
+   git clone https://github.com/your_username/domini-store.git
+   ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+2. Navigate to the project directory:
 
-## Further help
+   ```bash
+   cd domini-store
+   ```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
+
+## Usage
+
+To start the development server, run:
+
+```bash
+ng serve
+```
+
+Navigate to `http://localhost:4200/` in your browser. The application will automatically reload if you make changes to the source files.
+
+## Testing
+
+To run the unit tests, use:
+
+```bash
+ng test
+```
+
+## Contributions
+
+Contributions are welcome. If you would like to contribute, please follow these steps:
+
+1. Fork the project.
+2. Create a new branch (`git checkout -b feature/new-feature`).
+3. Make your changes and commit (`git commit -m 'Add a new feature'`).
+4. Push to the branch (`git push origin feature/new-feature`).
+5. Open a Pull Request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
