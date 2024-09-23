@@ -10,7 +10,7 @@ import { selectProductById } from '../state/products.selectors';
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
 })
-export class DetailsComponent {
+export default class DetailsComponent {
   // @Input() productId!: number;
   // productId = input.required<number>();
   private readonly _store = inject(Store);

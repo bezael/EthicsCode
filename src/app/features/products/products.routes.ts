@@ -8,8 +8,7 @@ const productRoutes: Routes = [
   },
   {
     path: ':productId',
-    loadComponent: () =>
-      import('./details/details.component').then((c) => c.DetailsComponent),
+    loadComponent: () => import('./details/details.component'),
   },
 ];
 export default productRoutes;
