@@ -1,4 +1,11 @@
-import { Component, input, output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  input,
+  Output,
+  output,
+} from '@angular/core';
 import { Product } from '../models/product.model';
 
 @Component({
@@ -7,13 +14,10 @@ import { Product } from '../models/product.model';
   styleUrl: './product-card.component.scss',
 })
 export class ProductCardComponent {
-  // @Input({ required: true, alias: 'product' }) currentProduct!: Product;
-  // @Output() addToCartEvent = new EventEmitter<Product>();
-
-  currentProduct = input.required<Product>({ alias: 'product' });
-  addToCartEvent = output<Product>();
+  @Input({ required: true, alias: 'product' }) currentProduct!: Product;
+  @Output() addToCartEvent = new EventEmitter<Product>();
 
   onAddToCart(): void {
-    this.addToCartEvent.emit(this.currentProduct());
+    this.addToCartEvent.emit(this.currentProduct);
   }
 }
